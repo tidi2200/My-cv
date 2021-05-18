@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <title>You are my Hero</title>
+</head>
+<body>
+    <div class="container-fluid mx-auto">
+        <input class="form-control" type="text" id="heroName" placeholder="Input your Hero ...">
+        <button type="button" class="btn btn-danger" onclick="findHero()">Find</button>
+        <div class="content">
+           
+        </div>
+    </div>
+</body>
+<script>
+    const findHero = () => {
+        let heroName = document.getElementById('heroName').value;
+        let heroInfo = document.getElementById('generateHero'); 
+        const settings = {
+            "url": `https://www.superheroapi.com/api.php/3906374896146552/search/${heroName}`,
+            "method": "GET",
+        };
+
+        $.ajax(settings).done(function (response) {
+            //console.log(response);
+            //alert(response.results[0].name);
+            $(".content").html(
+                `<div class="row">
+                    <div class="col-sm-6">
+                        <h1>${response.results[0].name}</h1>
+                        <ul>
+                            <li><h3>${response.results[0].biography['full-name']}</h3></li>
+                            <li>${response.results[0].biography['place-of-birth']}</li>
+                            <li>${response.results[0].biography.publisher}</li>
+                            <li>${response.results[0].connections.relatives}</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <img src="${response.results[0].image.url}" alt="Avatar hero" id="avatar">
+                    </div>
+                </div>`
+            );  
+        });
+    }
+    // const getHero = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         const data = ()
+    //     }, 1000);
+    // })
+</script>
+<style>
+
+</style>
+</html>

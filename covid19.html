@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="root" onclick="covid()">
+        Covid-19
+    </button>
+    <script>
+        const covid = () => {
+            fetch("https://covid-193.p.rapidapi.com/countries?search=vietnam", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "b310615109msh6376a00e4b64923p1c22dajsn81aa1e53cfb5",
+		"x-rapidapi-host": "covid-193.p.rapidapi.com"
+	}
+            })
+            .then(response => {
+                console.log(response);
+                let data = JSON.stringify(response);
+                alert(data);
+            })
+            .catch(err => {
+                console.error(err);
+            });
+        }
+    </script>
+</body>
+</html>
